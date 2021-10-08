@@ -20,8 +20,11 @@ This repo is built on top the Exiled apes Candy_Machine_Mint_Site example with a
 ```
 git clone https://github.com/CryptoOutcasts/Candy_Machine_Whitelist_Site.git
 ```
-
-2. Define your environment variables using the instructions below, and start up the server with `npm start`.
+2. Install dependencies
+```
+yarn install
+```
+4. Define your environment variables using the instructions below, and start up the server with `npm start`.
 
 #### Environment Variables
 
