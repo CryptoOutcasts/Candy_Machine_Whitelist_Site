@@ -18,7 +18,7 @@ This repo is built on top the Exiled apes Candy_Machine_Mint_Site example with a
 
 1. Fork the project, then clone down. Example:
 ```
-git clone git@github.com:exiled-apes/candy-machine-mint.git
+git clone https://github.com/CryptoOutcasts/Candy_Machine_Whitelist_Site.git
 ```
 
 2. Define your environment variables using the instructions below, and start up the server with `npm start`.
@@ -77,6 +77,10 @@ This should be the API key you defined as the Environmental variable .env in the
 ### REFERENCE https://github.com/CryptoOutcasts/Whitelist_API
 
 
+3.build the project using
+```
+npm build
+```
 
 
 
