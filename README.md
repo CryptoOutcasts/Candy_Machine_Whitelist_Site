@@ -1,13 +1,8 @@
 # Candy-Machine-Mint
 
-The Candy-Machine-Mint project is designed to let users fork, customize, and deploy their own candy machine mint app to a custom domain, ultra fast.
-
-A candy machine is an on-chain Solana program (or smart contract) for managing fair mint. Fair mints:
-* Start and finish at the same time for everyone.
-* Won't accept your funds if they're out of NFTs to sell.
-
-The Candy-Machine-Mint project is meant to be as simple and usable as possible, accessible to everyone from long-time crypto devs to junior React devs with a vague interest in NFTs. Our goal is to empower users to create their own front ends to display, sell, and manage their NFTs as simply as possible by just updating a few styled components and following a well-documented process for setup and shipping.
-
+This website is built on top the Exiled apes Candy_Machine_Mint_Site example with added whitelist functionality
+## BEFORE YOU START
+ # Visit https://github.com/CryptoOutcasts/Whitelist_API and follow the steps to get your whitelist API setup and then continue here.
 ## Getting Set Up
 
 ### Prerequisites
@@ -26,14 +21,7 @@ The Candy-Machine-Mint project is meant to be as simple and usable as possible, 
 git clone git@github.com:exiled-apes/candy-machine-mint.git
 ```
 
-2. Build the project. Example:
-```
-cd candy-machine-mint
-yarn install
-yarn build
-```
-
-3. Define your environment variables using the instructions below, and start up the server with `npm start`.
+2. Define your environment variables using the instructions below, and start up the server with `npm start`.
 
 #### Environment Variables
 
@@ -74,6 +62,29 @@ REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
 ```
 
 This identifies the RPC server your web app will access the Solana network through.
+
+```
+REACT_APP_API_URL==https://myherokuproject.herokuapp.com
+```
+
+This should be the url of your API either from heroku or any other hosting services you choose
+# REFERENCE: https://github.com/CryptoOutcasts/Whitelist_API
+
+```
+REACT_APP_SECRET_KEY=__PLACEHOLDER__
+```
+This should be the API key you defined as the Environmental variable .env in the API repo
+# REFERENCE https://github.com/CryptoOutcasts/Whitelist_API
+
+
+
+
+
+
+
+
+
+
 
 # Getting Started with Create React App
 
