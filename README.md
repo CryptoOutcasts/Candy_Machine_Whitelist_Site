@@ -72,6 +72,7 @@ REACT_APP_API_URL==https://myherokuproject.herokuapp.com
 
 This should be the url of your API either from heroku or any other hosting services you choose
 ### REFERENCE: https://github.com/CryptoOutcasts/Whitelist_API
+### Please do not add a forward slash to the end of the url. just like the example
 
 ```
 REACT_APP_SECRET_KEY=__PLACEHOLDER__
@@ -83,6 +84,12 @@ This should be the API key you defined as the Environmental variable .env in the
 3. build the project using
 ```
 yarn build
+```
+
+
+4. Start the app !
+```
+yarn start
 ```
 
 
