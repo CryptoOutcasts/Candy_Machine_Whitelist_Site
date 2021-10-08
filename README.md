@@ -1,6 +1,6 @@
 # Candy-Machine-Mint
 
-This website is built on top the Exiled apes Candy_Machine_Mint_Site example with added whitelist functionality
+This repo is built on top the Exiled apes Candy_Machine_Mint_Site example with added whitelist functionality
 ## BEFORE YOU START
  # Visit https://github.com/CryptoOutcasts/Whitelist_API and follow the steps to get your whitelist API setup and then continue here.
 ## Getting Set Up
