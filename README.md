@@ -68,13 +68,13 @@ REACT_APP_API_URL==https://myherokuproject.herokuapp.com
 ```
 
 This should be the url of your API either from heroku or any other hosting services you choose
-# REFERENCE: https://github.com/CryptoOutcasts/Whitelist_API
+### REFERENCE: https://github.com/CryptoOutcasts/Whitelist_API
 
 ```
 REACT_APP_SECRET_KEY=__PLACEHOLDER__
 ```
 This should be the API key you defined as the Environmental variable .env in the API repo
-# REFERENCE https://github.com/CryptoOutcasts/Whitelist_API
+### REFERENCE https://github.com/CryptoOutcasts/Whitelist_API
 
 
 
