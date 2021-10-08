@@ -77,9 +77,9 @@ This should be the API key you defined as the Environmental variable .env in the
 ### REFERENCE https://github.com/CryptoOutcasts/Whitelist_API
 
 
-3.build the project using
+3. build the project using
 ```
-npm build
+yarn build
 ```
 
 
