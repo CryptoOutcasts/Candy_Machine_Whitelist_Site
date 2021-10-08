@@ -37,10 +37,12 @@ export interface HomeProps {
 }
 
 const Home = (props: HomeProps) => {
+  const [api_url, setUrl] = useState(process.env.REACT_APP_API_URL)
   const [balance, setBalance] = useState<number>();
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
+  const [isWhitelisted, SetWhitelisted] = useState(false);
 
   const [itemsAvailable, setItemsAvailable] = useState(0);
   const [itemsRedeemed, setItemsRedeemed] = useState(0);
@@ -56,7 +58,6 @@ const Home = (props: HomeProps) => {
 
   const wallet = useAnchorWallet();
   const [candyMachine, setCandyMachine] = useState<CandyMachine>();
-
   const refreshCandyMachineState = () => {
     (async () => {
       if (!wallet) return;
@@ -80,11 +81,22 @@ const Home = (props: HomeProps) => {
       setIsSoldOut(itemsRemaining === 0);
       setStartDate(goLiveDate);
       setCandyMachine(candyMachine);
+
     })();
   };
 
   const onMint = async () => {
     try {
+      let res = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`, {method: "GET"})
+      const res_json = await res.json()
+      const res_num = await JSON.parse(JSON.stringify(res_json)).reserve //The number  of reserves the user has left
+      if(!isWhitelisted){
+        throw new Error("You are not whitelisted");
+      }
+      if(res_num - 1 < 0){
+        console.log("confirmed")
+        throw new Error("Not enough reserves");
+      }
       setIsMinting(true);
       if (wallet && candyMachine?.program) {
         const mintTxId = await mintOneToken(
@@ -108,6 +120,15 @@ const Home = (props: HomeProps) => {
             message: "Congratulations! Mint succeeded!",
             severity: "success",
           });
+          const to_send = await JSON.stringify({"reserve": res_num-1})
+          await fetch(`${api_url}/whitelisted/update/${(wallet as anchor.Wallet).publicKey.toString()}/${process.env.REACT_APP_SECRET_KEY}`, {
+            method: "PUT",
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: to_send})
+          console.log("Updated Reserves for user")
+
         } else {
           setAlertState({
             open: true,
@@ -118,8 +139,8 @@ const Home = (props: HomeProps) => {
       }
     } catch (error: any) {
       // TODO: blech:
-      let message = error.msg || "Minting failed! Please try again!";
-      if (!error.msg) {
+      let message = error.message || "Minting failed! Please try again!";
+      if (!error.message) {
         if (error.message.indexOf("0x138")) {
         } else if (error.message.indexOf("0x137")) {
           message = `SOLD OUT!`;
@@ -132,6 +153,10 @@ const Home = (props: HomeProps) => {
           setIsSoldOut(true);
         } else if (error.code === 312) {
           message = `Minting period hasn't started yet.`;
+        } else if (error.message === "You are not whitelisted"){
+          message = error.message;
+        } else if (error.message === "Not enough reserves"){
+          message = error.message
         }
       }
 
@@ -155,6 +180,13 @@ const Home = (props: HomeProps) => {
       if (wallet) {
         const balance = await props.connection.getBalance(wallet.publicKey);
         setBalance(balance / LAMPORTS_PER_SOL);
+        const data = await fetch(`${api_url}/whitelisted/member/${(wallet as anchor.Wallet).publicKey.toString()}`)
+        if(data.status.toString() !== "404"){
+          SetWhitelisted(true)
+        }
+        else{
+          console.log("not found")
+        }
       }
     })();
   }, [wallet, props.connection]);
@@ -184,7 +216,7 @@ const Home = (props: HomeProps) => {
           <ConnectButton>Connect Wallet</ConnectButton>
         ) : (
           <MintButton
-            disabled={isSoldOut || isMinting || !isActive}
+            disabled={!isWhitelisted || isSoldOut || isMinting || !isActive} //change happened here
             onClick={onMint}
             variant="contained"
           >
