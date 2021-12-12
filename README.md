@@ -1,4 +1,6 @@
+
 # Candy-Machine-Mint
+## full video tutorial can be found here by a generous contributor ❤️: https://www.youtube.com/watch?v=SivKM48-Tt0
 
 This repo is built on top the Exiled apes Candy_Machine_Mint_Site example with added whitelist functionality
 ## BEFORE YOU START
